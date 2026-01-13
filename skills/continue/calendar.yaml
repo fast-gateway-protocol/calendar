@@ -1,0 +1,67 @@
+# Continue rules for Calendar FGP integration
+# Place in ~/.continue/rules/
+
+rules:
+  - name: fgp-calendar
+    description: "Fast Google Calendar operations via FGP daemon (10x faster than MCP)"
+    instructions: |
+      Use `fgp call calendar.<method> -p '{params}'` for Calendar operations.
+
+      ## Available Methods
+
+      | Method | Description |
+      |--------|-------------|
+      | `calendar.today` | Get today's events |
+      | `calendar.upcoming` | Get upcoming events |
+      | `calendar.search` | Search events by query |
+      | `calendar.create` | Create a new event |
+      | `calendar.free_slots` | Find available time slots |
+
+      ## Commands
+
+      ### Get Today's Events
+      ```bash
+      fgp call calendar.today
+      ```
+
+      ### Get Upcoming Events
+      ```bash
+      fgp call calendar.upcoming -p '{"days": 7, "limit": 20}'
+      ```
+      Parameters: `days` (optional), `limit` (optional)
+
+      ### Search Events
+      ```bash
+      fgp call calendar.search -p '{"query": "meeting", "days": 14}'
+      ```
+      Parameters: `query` (required), `days` (optional)
+
+      ### Create Event
+      ```bash
+      fgp call calendar.create -p '{"summary": "Meeting", "start": "2026-01-15T14:00:00Z", "end": "2026-01-15T15:00:00Z"}'
+      ```
+      Parameters: `summary`, `start`, `end` (required), `description` (optional)
+
+      ### Find Free Time
+      ```bash
+      fgp call calendar.free_slots -p '{"duration_minutes": 30, "days": 7}'
+      ```
+      Parameters: `duration_minutes` (required), `days` (optional)
+
+      ## Response Format
+
+      All commands return JSON with:
+      - `events`: Array of event objects
+      - `count`: Number of results
+      - `free_slots`: Array of available time slots (for free_slots)
+
+      ## Troubleshooting
+
+      - Check daemon: `fgp status calendar`
+      - Start daemon: `fgp start calendar`
+      - Logs: `~/.fgp/services/calendar/logs/`
+
+      ## Performance
+
+      - Cold start: ~50ms
+      - Warm call: ~10-30ms (10x faster than MCP)

@@ -1,0 +1,127 @@
+{
+  "name": "calendar",
+  "version": "1.0.0",
+  "description": "Fast Google Calendar integration via FGP daemon",
+  "protocol": "fgp@1",
+  "author": "Wolfgang Schoenberger",
+  "license": "MIT",
+  "repository": "https://github.com/wolfiesch/fgp-calendar",
+  "daemon": {
+    "entrypoint": "./target/release/fgp-calendar",
+    "socket": "calendar/daemon.sock",
+    "dependencies": ["python3"]
+  },
+  "methods": [
+    {
+      "name": "calendar.today",
+      "description": "Get today's calendar events",
+      "params": []
+    },
+    {
+      "name": "calendar.upcoming",
+      "description": "Get upcoming events",
+      "params": [
+        {
+          "name": "days",
+          "type": "integer",
+          "required": false,
+          "default": 7
+        },
+        {
+          "name": "limit",
+          "type": "integer",
+          "required": false,
+          "default": 20
+        }
+      ]
+    },
+    {
+      "name": "calendar.search",
+      "description": "Search events by query",
+      "params": [
+        {
+          "name": "query",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "days",
+          "type": "integer",
+          "required": false,
+          "default": 30
+        }
+      ]
+    },
+    {
+      "name": "calendar.create",
+      "description": "Create a new event",
+      "params": [
+        {
+          "name": "summary",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "start",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "end",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "calendar.free_slots",
+      "description": "Find available time slots",
+      "params": [
+        {
+          "name": "duration_minutes",
+          "type": "integer",
+          "required": true
+        },
+        {
+          "name": "days",
+          "type": "integer",
+          "required": false,
+          "default": 7
+        }
+      ]
+    }
+  ],
+  "skills": {
+    "claude-code": {
+      "source": "./skills/claude-code/",
+      "target": "~/.claude/skills/calendar/"
+    },
+    "cursor": {
+      "source": "./skills/cursor/",
+      "target": "~/.cursor/rules/"
+    },
+    "windsurf": {
+      "source": "./skills/windsurf/",
+      "target": "~/.windsurf/skills/"
+    },
+    "continue": {
+      "source": "./skills/continue/",
+      "target": "~/.continue/rules/"
+    }
+  },
+  "auth": {
+    "type": "oauth2",
+    "provider": "google",
+    "scopes": [
+      "https://www.googleapis.com/auth/calendar"
+    ],
+    "credentials_path": "~/.fgp/auth/google/credentials.json",
+    "token_path": "~/.fgp/auth/google/calendar_token.pickle"
+  },
+  "platforms": ["darwin", "linux"]
+}

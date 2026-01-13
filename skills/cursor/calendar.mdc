@@ -1,0 +1,60 @@
+---
+description: Fast Google Calendar operations via FGP daemon (10x faster than MCP)
+globs: ["**/*"]
+alwaysApply: false
+---
+
+# Calendar FGP Integration
+
+Use `fgp call calendar.*` commands for fast Calendar operations via persistent daemon.
+
+## Available Methods
+
+| Method | Description |
+|--------|-------------|
+| `calendar.today` | Get today's events |
+| `calendar.upcoming` | Get upcoming events |
+| `calendar.search` | Search events by query |
+| `calendar.create` | Create a new event |
+| `calendar.free_slots` | Find available time slots |
+
+## Commands
+
+### Get Today's Events
+```bash
+fgp call calendar.today
+```
+
+### Get Upcoming Events
+```bash
+fgp call calendar.upcoming -p '{"days": 7, "limit": 20}'
+```
+Parameters: `days` (optional, default: 7), `limit` (optional, default: 20)
+
+### Search Events
+```bash
+fgp call calendar.search -p '{"query": "meeting"}'
+```
+Parameters: `query` (required), `days` (optional, default: 30)
+
+### Create Event
+```bash
+fgp call calendar.create -p '{"summary": "Team sync", "start": "2026-01-15T14:00:00Z", "end": "2026-01-15T15:00:00Z"}'
+```
+Parameters: `summary`, `start`, `end` (required), `description` (optional)
+
+### Find Free Time
+```bash
+fgp call calendar.free_slots -p '{"duration_minutes": 30, "days": 7}'
+```
+Parameters: `duration_minutes` (required), `days` (optional, default: 7)
+
+## Setup
+
+1. Place Google OAuth credentials in `~/.fgp/auth/google/credentials.json`
+2. Start daemon: `fgp start calendar`
+3. Test: `fgp call calendar.today`
+
+## Response Format
+
+All commands return JSON with structured data.
