@@ -8,7 +8,7 @@ license = "MIT"
 repository = "https://github.com/wolfiesch/fgp-calendar"
 
 [dependencies]
-fgp-daemon = { git = "https://github.com/wolfiesch/fgp-daemon.git" }
+fgp-daemon = { path = "../fgp-daemon" }
 anyhow = "1.0"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
