@@ -61,9 +61,9 @@ WORKDIR /home/fgp
 
 ENV FGP_SOCKET_DIR=/home/fgp/.fgp/services
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
-    CMD fgp-calendar status || exit 1
+# Health check via socket
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+    CMD python3 -c "import socket,json;s=socket.socket(socket.AF_UNIX,socket.SOCK_STREAM);s.connect('/home/fgp/.fgp/services/calendar/daemon.sock');s.send(b'{\"id\":\"hc\",\"v\":1,\"method\":\"health\",\"params\":{}}\n');r=json.loads(s.recv(4096));exit(0 if r.get('ok') else 1)"
 
 # Mount points for credentials and socket
 VOLUME ["/home/fgp/.fgp/services", "/home/fgp/.config/google"]
