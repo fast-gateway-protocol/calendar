@@ -20,10 +20,7 @@ jobs:
           - target: x86_64-unknown-linux-gnu
             os: ubuntu-latest
             artifact: fgp-calendar-linux-x64
-          - target: aarch64-unknown-linux-gnu
-            os: ubuntu-latest
-            artifact: fgp-calendar-linux-arm64
-            cross: true
+          # Note: aarch64-unknown-linux-gnu skipped - PyO3 cross-compilation requires special setup
           - target: x86_64-apple-darwin
             os: macos-latest
             artifact: fgp-calendar-macos-x64
@@ -42,16 +39,7 @@ jobs:
         with:
           key: ${{ matrix.target }}
 
-      - name: Install cross
-        if: matrix.cross
-        run: cargo install cross --git https://github.com/cross-rs/cross
-
-      - name: Build (cross)
-        if: matrix.cross
-        run: cross build --release --target ${{ matrix.target }}
-
-      - name: Build (native)
-        if: ${{ !matrix.cross }}
+      - name: Build
         run: cargo build --release --target ${{ matrix.target }}
 
       - name: Package binary

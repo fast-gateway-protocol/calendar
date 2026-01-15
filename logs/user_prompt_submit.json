@@ -1,0 +1,34 @@
+[
+  {
+    "session_id": "57ed67ac-2bd7-4367-9402-225a5ad61c75",
+    "transcript_path": "/Users/wolfgangschoenberger/.claude/projects/-Users-wolfgangschoenberger-Projects-fgp/57ed67ac-2bd7-4367-9402-225a5ad61c75.jsonl",
+    "cwd": "/Users/wolfgangschoenberger/Projects/fgp/calendar",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "continue with github true api upgrade"
+  },
+  {
+    "session_id": "b084daa3-6131-406b-a78c-8246feeb00fe",
+    "transcript_path": "/Users/wolfgangschoenberger/.claude/projects/-Users-wolfgangschoenberger-Projects-fgp/b084daa3-6131-406b-a78c-8246feeb00fe.jsonl",
+    "cwd": "/Users/wolfgangschoenberger/Projects/fgp/calendar",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "create install.sh one-liner script"
+  },
+  {
+    "session_id": "b084daa3-6131-406b-a78c-8246feeb00fe",
+    "transcript_path": "/Users/wolfgangschoenberger/.claude/projects/-Users-wolfgangschoenberger-Projects-fgp/b084daa3-6131-406b-a78c-8246feeb00fe.jsonl",
+    "cwd": "/Users/wolfgangschoenberger/Projects/fgp/calendar",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "test install script with fly release"
+  },
+  {
+    "session_id": "b084daa3-6131-406b-a78c-8246feeb00fe",
+    "transcript_path": "/Users/wolfgangschoenberger/.claude/projects/-Users-wolfgangschoenberger-Projects-fgp/b084daa3-6131-406b-a78c-8246feeb00fe.jsonl",
+    "cwd": "/Users/wolfgangschoenberger/Projects/fgp/calendar",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "create v0.1.0 releases for other daemons"
+  }
+]
