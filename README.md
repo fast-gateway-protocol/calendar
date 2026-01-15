@@ -1,6 +1,6 @@
 # fgp-calendar
 
-Fast Google Calendar daemon for [FGP](https://github.com/wolfiesch/fgp) - the universal package manager for AI agents.
+Fast Google Calendar daemon for [FGP](https://github.com/fast-gateway-protocol) - the universal package manager for AI agents.
 
 ## Features
 
