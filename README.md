@@ -77,6 +77,63 @@ fgp call calendar.free_slots -p '{"duration_minutes": 30, "days": 7}'
 - Google API libraries: `pip install google-api-python-client google-auth-oauthlib python-dateutil`
 - Google OAuth credentials (see [Google Calendar API docs](https://developers.google.com/calendar/api/quickstart/python))
 
+## Troubleshooting
+
+### OAuth Authorization Failed
+
+**Symptom:** Browser opens but authorization fails
+
+**Solutions:**
+1. Ensure Google Calendar API is enabled in your Cloud project
+2. Check OAuth credentials are "Desktop application" type
+3. Verify `credentials.json` exists in `~/.fgp/auth/google/`
+4. Delete token and re-authorize:
+   ```bash
+   rm ~/.fgp/auth/google/calendar_token.pickle
+   fgp restart calendar
+   ```
+
+### No Events Returned
+
+**Symptom:** `calendar.today` returns empty when you have events
+
+**Check:**
+1. Correct calendar selected (default is primary)
+2. Events are not marked as "free" (show as busy)
+3. Try with date range: `calendar.upcoming` with larger `days` value
+
+### Timezone Issues
+
+**Symptom:** Event times appear wrong
+
+**Solutions:**
+1. Ensure events have timezone specified in ISO format
+2. Use UTC times with `Z` suffix: `2026-01-15T14:00:00Z`
+3. Or specify timezone: `2026-01-15T14:00:00-08:00`
+
+### Free Slots Not Found
+
+**Symptom:** `calendar.free_slots` returns empty when time is available
+
+**Check:**
+1. Working hours configured correctly (default 9am-5pm)
+2. Duration is reasonable (try shorter duration)
+3. Days ahead is sufficient
+
+### Connection Refused
+
+**Symptom:** "Connection refused" errors
+
+**Solution:**
+```bash
+# Check daemon status
+pgrep -f fgp-calendar
+
+# Restart
+fgp stop calendar
+fgp start calendar
+```
+
 ## License
 
 MIT
