@@ -4,7 +4,7 @@
 # Uses multi-stage build for minimal image size.
 
 # Stage 1: Build the Rust binary
-FROM rust:1.75-slim-bookworm AS builder
+FROM rust:slim-bookworm AS builder
 
 WORKDIR /app
 
@@ -59,7 +59,7 @@ ENV FGP_SOCKET_DIR=/home/fgp/.fgp/services
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
-    CMD fgp-calendar health || exit 1
+    CMD fgp-calendar status || exit 1
 
 # Mount points for credentials and socket
 VOLUME ["/home/fgp/.fgp/services", "/home/fgp/.config/google"]
