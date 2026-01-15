@@ -40,13 +40,17 @@ RUN apt-get update && apt-get install -y \
 RUN pip3 install --break-system-packages \
     google-auth \
     google-auth-oauthlib \
-    google-api-python-client
+    google-api-python-client \
+    python-dateutil
 
 # Create non-root user for security
 RUN useradd -m -s /bin/bash fgp
 
 # Copy binary from builder
 COPY --from=builder /app/target/release/fgp-calendar /usr/local/bin/
+
+# Copy Python module
+COPY module /usr/local/bin/module
 
 # Set up FGP directory structure
 RUN mkdir -p /home/fgp/.fgp/services/calendar/logs \
